@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookmark Dashboard</title>
+  <style>
+    :root {
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --accent-soft: #eef2ff;
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2430;
+      --muted: #6b7280;
+      --border: #e6e8ef;
+      --danger: #ef4444;
+      --radius: 14px;
+      --shadow: 0 1px 3px rgba(20, 24, 40, .06), 0 8px 24px rgba(20, 24, 40, .06);
+      --shadow-hover: 0 4px 12px rgba(20, 24, 40, .10), 0 16px 40px rgba(20, 24, 40, .10);
+      --header-bg: rgba(246, 247, 251, .85);
+    }
+
+    :root[data-theme="dark"] {
+      --header-bg: rgba(20, 22, 31, .85);
+      --accent: #818cf8;
+      --accent-hover: #6f7bf5;
+      --accent-soft: #2a2d4a;
+      --bg: #14161f;
+      --card: #1c1f2b;
+      --text: #e8eaf2;
+      --muted: #9aa0b3;
+      --border: #2c3040;
+      --danger: #f87171;
+      --shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .35);
+      --shadow-hover: 0 4px 12px rgba(0, 0, 0, .5), 0 16px 40px rgba(0, 0, 0, .45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+
+    /* ---------- Header ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #7c73f7);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      flex: none;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: -.01em;
+    }
+
+    .theme-toggle {
+      margin-left: auto;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      font-size: 18px;
+      cursor: pointer;
+      transition: all .15s;
+      flex: none;
+    }
+
+    .theme-toggle:hover { border-color: var(--accent); }
+
+    .brand p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ---------- Add form ---------- */
+    form#add-form {
+      display: grid;
+      grid-template-columns: 1.4fr 1.6fr 1fr auto;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .field { display: flex; flex-direction: column; }
+
+    form#add-form input,
+    form#add-form textarea,
+    .search-bar input {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      font: inherit;
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    form#add-form textarea {
+      grid-column: 1 / -1;
+      resize: vertical;
+      min-height: 44px;
+    }
+
+    form#add-form input:focus,
+    form#add-form textarea:focus,
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    button.btn-primary {
+      padding: 11px 20px;
+      border: none;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s, transform .05s;
+    }
+
+    button.btn-primary:hover { background: var(--accent-hover); }
+    button.btn-primary:active { transform: translateY(1px); }
+
+    .form-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    button.btn-secondary {
+      padding: 11px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+      color: var(--text);
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .15s;
+    }
+
+    button.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .count {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ---------- Main / controls ---------- */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .search-bar {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .search-bar input { padding-left: 40px; }
+
+    .search-bar svg {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .chip {
+      padding: 7px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    .chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ---------- Grid + cards ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      transition: transform .15s, box-shadow .15s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding-right: 28px;
+    }
+
+    .card-head img {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      flex: none;
+      background: var(--accent-soft);
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      letter-spacing: -.01em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-title:hover { color: var(--accent); }
+
+    .card-url {
+      font-size: 12.5px;
+      color: var(--muted);
+      text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: block;
+    }
+
+    .card-url:hover { color: var(--accent); }
+
+    .card-notes {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .badge {
+      align-self: flex-start;
+      margin-top: auto;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .card-actions {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      gap: 2px;
+    }
+
+    .icon-btn {
+      width: 26px;
+      height: 26px;
+      border: none;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1;
+      cursor: pointer;
+      transition: all .15s;
+      display: grid;
+      place-items: center;
+    }
+
+    .delete-btn { font-size: 18px; }
+    .delete-btn:hover { background: #fee2e2; color: var(--danger); }
+    :root[data-theme="dark"] .delete-btn:hover { background: #4a2330; }
+    .edit-btn:hover { background: var(--accent-soft); color: var(--accent); }
+
+    /* ---------- Empty state ---------- */
+    .empty {
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--muted);
+    }
+
+    .empty .big { font-size: 40px; margin-bottom: 8px; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 640px) {
+      .header-inner, main { padding: 16px; }
+      form#add-form { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">🔖</div>
+        <div>
+          <h1>Bookmark Dashboard</h1>
+          <p>Your personal collection of links</p>
+        </div>
+        <button type="button" class="theme-toggle" id="theme-toggle" title="Toggle dark mode">🌙</button>
+      </div>
+
+      <form id="add-form" autocomplete="off">
+        <div class="field">
+          <input type="text" id="title" placeholder="Title *" required />
+        </div>
+        <div class="field">
+          <input type="text" id="url" placeholder="URL *  (e.g. example.com)" required />
+        </div>
+        <div class="field">
+          <input type="text" id="category" placeholder="Category *  (e.g. Dev)" required />
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn-primary" id="submit-btn">+ Add</button>
+          <button type="button" class="btn-secondary" id="cancel-btn" style="display:none">Cancel</button>
+        </div>
+        <textarea id="notes" placeholder="Notes (optional)"></textarea>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    <div class="search-bar">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="search" placeholder="Search by title or category..." />
+    </div>
+
+    <div class="filters" id="filters"></div>
+
+    <div class="count" id="count"></div>
+
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'bookmarks_v2';
+    const THEME_KEY = 'theme_v1';
+
+    const SAMPLES = [
+      { title: 'My GitHub Repo', url: 'https://github.com/Jimi-Ker/Claude-Code-Practice', category: 'Dev', notes: 'Claude Code practice repository.' },
+      { title: 'Claude', url: 'https://claude.ai', category: 'AI', notes: 'AI assistant by Anthropic.' },
+      { title: 'YouTube', url: 'https://youtube.com', category: 'Media', notes: '' },
+      { title: 'Obsidian', url: 'https://obsidian.md', category: 'Productivity', notes: 'Notes & knowledge base.' }
+    ];
+
+    let bookmarks = [];
+    let activeCategory = 'All';
+    let searchTerm = '';
+    let editingId = null;
+
+    const grid = document.getElementById('grid');
+    const filters = document.getElementById('filters');
+    const searchInput = document.getElementById('search');
+    const form = document.getElementById('add-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const countEl = document.getElementById('count');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    /* ---------- Persistence ---------- */
+    function load() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw === null) {
+        // First-ever load: seed with samples.
+        bookmarks = SAMPLES.map(b => ({ id: makeId(), ...b }));
+        save();
+      } else {
+        try {
+          bookmarks = JSON.parse(raw) || [];
+        } catch {
+          bookmarks = [];
+        }
+      }
+    }
+
+    function save() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks));
+    }
+
+    function makeId() {
+      return (crypto.randomUUID && crypto.randomUUID()) || ('id-' + Date.now() + '-' + Math.random().toString(16).slice(2));
+    }
+
+    /* ---------- Helpers ---------- */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function normalizeUrl(url) {
+      url = url.trim();
+      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+      return url;
+    }
+
+    function hostOf(url) {
+      try { return new URL(url).hostname; }
+      catch { return ''; }
+    }
+
+    function sameUrl(a, b) {
+      const clean = u => normalizeUrl(u).toLowerCase().replace(/\/+$/, '');
+      return clean(a) === clean(b);
+    }
+
+    /* ---------- Theme ---------- */
+    function applyTheme(theme) {
+      const dark = theme === 'dark';
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      themeToggle.textContent = dark ? '☀️' : '🌙';
+    }
+
+    function loadTheme() {
+      applyTheme(localStorage.getItem(THEME_KEY) || 'light');
+    }
+
+    function toggleTheme() {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, next);
+      applyTheme(next);
+    }
+
+    /* ---------- Rendering ---------- */
+    function renderFilters() {
+      const cats = ['All', ...Array.from(new Set(bookmarks.map(b => b.category).filter(Boolean))).sort((a, b) => a.localeCompare(b))];
+      if (!cats.includes(activeCategory)) activeCategory = 'All';
+      filters.innerHTML = cats.map(c =>
+        `<button class="chip${c === activeCategory ? ' active' : ''}" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`
+      ).join('');
+    }
+
+    function render() {
+      renderFilters();
+
+      const term = searchTerm.trim().toLowerCase();
+      const visible = bookmarks.filter(b => {
+        const matchesCat = activeCategory === 'All' || b.category === activeCategory;
+        const matchesSearch = !term ||
+          (b.title || '').toLowerCase().includes(term) ||
+          (b.category || '').toLowerCase().includes(term);
+        return matchesCat && matchesSearch;
+      });
+
+      countEl.textContent = bookmarks.length === 0
+        ? ''
+        : `Showing ${visible.length} of ${bookmarks.length} bookmark${bookmarks.length === 1 ? '' : 's'}`;
+
+      if (visible.length === 0) {
+        const msg = bookmarks.length === 0
+          ? 'No bookmarks yet — add your first one above!'
+          : 'No bookmarks match your search or filter.';
+        grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="big">🔍</div>${escapeHtml(msg)}</div>`;
+        return;
+      }
+
+      grid.innerHTML = visible.map(b => {
+        const host = hostOf(b.url);
+        const favicon = host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64` : '';
+        return `
+          <div class="card">
+            <div class="card-actions">
+              <button class="icon-btn edit-btn" data-id="${escapeHtml(b.id)}" title="Edit bookmark">&#9998;</button>
+              <button class="icon-btn delete-btn" data-id="${escapeHtml(b.id)}" title="Delete bookmark">&times;</button>
+            </div>
+            <div class="card-head">
+              ${favicon ? `<img src="${escapeHtml(favicon)}" alt="" onerror="this.style.display='none'" />` : ''}
+              <div style="min-width:0">
+                <a class="card-title" href="${escapeHtml(b.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.title)}</a>
+                <a class="card-url" href="${escapeHtml(b.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(host || b.url)}</a>
+              </div>
+            </div>
+            ${b.notes ? `<p class="card-notes">${escapeHtml(b.notes)}</p>` : ''}
+            ${b.category ? `<span class="badge">${escapeHtml(b.category)}</span>` : ''}
+          </div>`;
+      }).join('');
+    }
+
+    /* ---------- Actions ---------- */
+    function submitForm(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const urlRaw = document.getElementById('url').value.trim();
+      const category = document.getElementById('category').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+
+      if (!title || !urlRaw || !category) return;
+      const url = normalizeUrl(urlRaw);
+
+      if (editingId) {
+        const bm = bookmarks.find(b => b.id === editingId);
+        if (bm) Object.assign(bm, { title, url, category, notes });
+        clearEdit();
+      } else {
+        const dupe = bookmarks.find(b => sameUrl(b.url, url));
+        if (dupe && !confirm(`"${dupe.title}" already has this URL. Add it anyway?`)) return;
+        bookmarks.unshift({ id: makeId(), title, url, category, notes });
+        form.reset();
+      }
+      save();
+      document.getElementById('title').focus();
+      render();
+    }
+
+    function startEdit(id) {
+      const bm = bookmarks.find(b => b.id === id);
+      if (!bm) return;
+      editingId = id;
+      document.getElementById('title').value = bm.title;
+      document.getElementById('url').value = bm.url;
+      document.getElementById('category').value = bm.category;
+      document.getElementById('notes').value = bm.notes || '';
+      submitBtn.textContent = 'Save';
+      cancelBtn.style.display = '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('title').focus();
+    }
+
+    function clearEdit() {
+      editingId = null;
+      form.reset();
+      submitBtn.textContent = '+ Add';
+      cancelBtn.style.display = 'none';
+    }
+
+    function deleteBookmark(id) {
+      const bm = bookmarks.find(b => b.id === id);
+      if (!bm) return;
+      if (!confirm(`Delete "${bm.title}"?`)) return;
+      bookmarks = bookmarks.filter(b => b.id !== id);
+      if (editingId === id) clearEdit();
+      save();
+      render();
+    }
+
+    /* ---------- Events ---------- */
+    form.addEventListener('submit', submitForm);
+    cancelBtn.addEventListener('click', clearEdit);
+    themeToggle.addEventListener('click', toggleTheme);
+
+    searchInput.addEventListener('input', e => {
+      searchTerm = e.target.value;
+      render();
+    });
+
+    filters.addEventListener('click', e => {
+      const btn = e.target.closest('.chip');
+      if (!btn) return;
+      activeCategory = btn.dataset.cat;
+      render();
+    });
+
+    grid.addEventListener('click', e => {
+      const del = e.target.closest('.delete-btn');
+      if (del) { deleteBookmark(del.dataset.id); return; }
+      const edit = e.target.closest('.edit-btn');
+      if (edit) { startEdit(edit.dataset.id); }
+    });
+
+    /* ---------- Init ---------- */
+    loadTheme();
+    load();
+    render();
+  </script>
+</body>
+</html>
