@@ -4,7 +4,6 @@
    ========================================================================== */
 
 :root {
-  --header-h: 64px;
   --accent: #4f46e5;
   --accent-hover: #4338ca;
   --accent-soft: #eef2ff;
@@ -51,8 +50,6 @@ body {
 }
 
 a { color: inherit; }
-
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
 /* ---------- Header / nav ---------- */
 header {
@@ -396,7 +393,7 @@ main {
   flex-wrap: wrap;
   gap: 4px;
   position: sticky;
-  top: calc(var(--header-h) + 12px);
+  top: 76px;
   background: var(--bg);
   padding: 10px 0;
   z-index: 5;
@@ -417,7 +414,7 @@ main {
 .az-bar a:hover { color: var(--accent); border-color: var(--accent); }
 .az-bar a.disabled { opacity: .35; pointer-events: none; }
 
-.glossary-section { margin-top: 18px; scroll-margin-top: calc(var(--header-h) + 66px); }
+.glossary-section { margin-top: 18px; scroll-margin-top: 130px; }
 .glossary-letter {
   font-size: 20px;
   font-weight: 700;
@@ -522,5 +519,5 @@ footer .footer-inner {
   .header-inner, main { padding-left: 16px; padding-right: 16px; }
   nav.main-nav { margin-left: 0; width: 100%; }
   .grid, .hub-grid { grid-template-columns: 1fr; }
-  .az-bar { top: var(--header-h); }
+  .az-bar { top: 64px; }
 }
