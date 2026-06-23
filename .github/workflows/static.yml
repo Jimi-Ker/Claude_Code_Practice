@@ -36,8 +36,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          # Upload cox-ai-hub subfolder as the site root
+          path: './cox-ai-hub'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
