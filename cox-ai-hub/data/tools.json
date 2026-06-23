@@ -9,6 +9,15 @@
     "cost": "Internal"
   },
   {
+    "name": "Email Analyser",
+    "url": "https://coxautoinceur-my.sharepoint.com/:u:/g/personal/jim_ker_coxautoinc_com/IQCfXQZApl8IRq5luSzW4ntoAfdbXX97f3ovakkni5WNLWA?e=gcoVhC",
+    "category": "Productivity",
+    "status": "Approved",
+    "description": "Internal tool for analysing email performance and content.",
+    "owner": "Marketing Ops",
+    "cost": "Internal"
+  },
+  {
     "name": "ChatGPT Enterprise",
     "url": "https://chat.openai.com",
     "category": "Writing",
