@@ -36,7 +36,7 @@ function applyTheme(theme) {
 }
 
 function loadTheme() {
-  applyTheme(localStorage.getItem(THEME_KEY) || "light");
+  applyTheme(localStorage.getItem(THEME_KEY) || "dark");
 }
 
 function toggleTheme() {
@@ -69,7 +69,7 @@ function renderChrome(activePage) {
       <nav class="main-nav">
         ${links.map(l => `<a href="${l.href}"${l.key === activePage ? ' class="active"' : ""}>${escapeHtml(l.label)}</a>`).join("")}
       </nav>
-      <button type="button" class="theme-toggle" id="theme-toggle" title="Toggle dark mode">🌙</button>
+      <button type="button" class="theme-toggle" id="theme-toggle" title="Toggle dark mode">☀️</button>
     `;
     document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
   }
