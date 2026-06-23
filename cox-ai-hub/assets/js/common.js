@@ -4,8 +4,6 @@
    Reused on every page. Harvested from my-bookmarks-app/index.html.
    ========================================================================== */
 
-const THEME_KEY = "cox_ai_hub_theme_v1";
-
 /* ---------- Escaping (from bookmarks app) ---------- */
 function escapeHtml(str) {
   return String(str == null ? "" : str)
@@ -25,24 +23,6 @@ function hostOf(url) {
 function faviconFor(url) {
   const host = hostOf(url);
   return host ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64` : "";
-}
-
-/* ---------- Theme (from bookmarks app) ---------- */
-function applyTheme(theme) {
-  const dark = theme === "dark";
-  document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
-  const toggle = document.getElementById("theme-toggle");
-  if (toggle) toggle.textContent = dark ? "☀️" : "🌙";
-}
-
-function loadTheme() {
-  applyTheme(localStorage.getItem(THEME_KEY) || "light");
-}
-
-function toggleTheme() {
-  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-  localStorage.setItem(THEME_KEY, next);
-  applyTheme(next);
 }
 
 /* ---------- Shared chrome (header + footer) ---------- */
@@ -69,9 +49,7 @@ function renderChrome(activePage) {
       <nav class="main-nav">
         ${links.map(l => `<a href="${l.href}"${l.key === activePage ? ' class="active"' : ""}>${escapeHtml(l.label)}</a>`).join("")}
       </nav>
-      <button type="button" class="theme-toggle" id="theme-toggle" title="Toggle dark mode">🌙</button>
     `;
-    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
   }
 
   const footer = document.querySelector("footer .footer-inner");
@@ -117,5 +95,3 @@ function matchesTerm(haystacks, term) {
   return haystacks.some(h => (h || "").toString().toLowerCase().includes(t));
 }
 
-/* ---------- Init theme immediately (before paint) ---------- */
-loadTheme();
