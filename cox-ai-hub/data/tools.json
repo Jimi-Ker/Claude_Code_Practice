@@ -1,5 +1,14 @@
 [
   {
+    "name": "HTML Presentation Template",
+    "url": "https://coxautoinceur.sharepoint.com/sites/CharliesHandover/SitePages/HTML-presentation-Template.aspx",
+    "category": "Productivity",
+    "status": "Approved",
+    "description": "Internal SharePoint template for HTML-based presentations.",
+    "owner": "Marketing Ops",
+    "cost": "Internal"
+  },
+  {
     "name": "ChatGPT Enterprise",
     "url": "https://chat.openai.com",
     "category": "Writing",
