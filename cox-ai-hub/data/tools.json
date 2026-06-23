@@ -1,0 +1,92 @@
+[
+  {
+    "name": "ChatGPT Enterprise",
+    "url": "https://chat.openai.com",
+    "category": "Writing",
+    "status": "Approved",
+    "description": "General-purpose assistant for drafting copy, summarizing, and brainstorming campaign ideas.",
+    "owner": "Marketing Ops",
+    "cost": "Licensed"
+  },
+  {
+    "name": "Claude",
+    "url": "https://claude.ai",
+    "category": "Writing",
+    "status": "Approved",
+    "description": "Long-form writing and analysis assistant; strong at reviewing documents and brand voice.",
+    "owner": "Marketing Ops",
+    "cost": "Licensed"
+  },
+  {
+    "name": "Microsoft Copilot",
+    "url": "https://copilot.microsoft.com",
+    "category": "Productivity",
+    "status": "Approved",
+    "description": "AI built into Word, Excel, PowerPoint, and Outlook for drafting and summarizing inside Microsoft 365.",
+    "owner": "IT Enablement",
+    "cost": "Licensed"
+  },
+  {
+    "name": "Adobe Firefly",
+    "url": "https://firefly.adobe.com",
+    "category": "Images",
+    "status": "Approved",
+    "description": "Commercially-safe generative image and design tool integrated with Creative Cloud.",
+    "owner": "Creative Studio",
+    "cost": "Licensed"
+  },
+  {
+    "name": "Midjourney",
+    "url": "https://www.midjourney.com",
+    "category": "Images",
+    "status": "Pilot",
+    "description": "High-quality concept image generation. In limited pilot — confirm usage rights before publishing.",
+    "owner": "Creative Studio",
+    "cost": "Paid"
+  },
+  {
+    "name": "Perplexity",
+    "url": "https://www.perplexity.ai",
+    "category": "Research",
+    "status": "Pilot",
+    "description": "Answer engine with cited sources for quick market and competitor research.",
+    "owner": "Insights Team",
+    "cost": "Free"
+  },
+  {
+    "name": "Otter.ai",
+    "url": "https://otter.ai",
+    "category": "Productivity",
+    "status": "Pilot",
+    "description": "Meeting transcription and summaries. Pilot only — do not record meetings with sensitive data.",
+    "owner": "Marketing Ops",
+    "cost": "Free"
+  },
+  {
+    "name": "Synthesia",
+    "url": "https://www.synthesia.io",
+    "category": "Video",
+    "status": "Pilot",
+    "description": "AI avatar video creation for internal training and explainer content.",
+    "owner": "Creative Studio",
+    "cost": "Paid"
+  },
+  {
+    "name": "Grammarly",
+    "url": "https://www.grammarly.com",
+    "category": "Writing",
+    "status": "Approved",
+    "description": "Writing assistant for grammar, tone, and clarity across email and documents.",
+    "owner": "Marketing Ops",
+    "cost": "Licensed"
+  },
+  {
+    "name": "Consumer DeepSeek / unsanctioned chatbots",
+    "url": "https://www.cox.com",
+    "category": "Writing",
+    "status": "Restricted",
+    "description": "Do not paste Cox or customer data into unapproved public chatbots. Use approved tools above instead.",
+    "owner": "Security",
+    "cost": "Free"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "title": "AI at Cox: Start Here",
+    "type": "Article",
+    "level": "Beginner",
+    "url": "https://intranet.cox.example.com/ai/start-here",
+    "summary": "What's approved, what's not, and how to use AI responsibly with Cox and customer data.",
+    "tags": ["policy", "getting started", "data safety"]
+  },
+  {
+    "title": "Writing Better Prompts",
+    "type": "Article",
+    "level": "Beginner",
+    "url": "https://intranet.cox.example.com/ai/prompting-basics",
+    "summary": "Five repeatable patterns for getting clearer, on-brand output from any AI assistant.",
+    "tags": ["prompting", "basics", "copywriting"]
+  },
+  {
+    "title": "Drafting a Campaign Brief with AI",
+    "type": "Walkthrough",
+    "level": "Intermediate",
+    "url": "https://intranet.cox.example.com/ai/campaign-brief",
+    "summary": "Step-by-step: turn a rough idea into a structured campaign brief using approved tools.",
+    "tags": ["campaigns", "workflow", "copywriting"]
+  },
+  {
+    "title": "Generating On-Brand Images with Firefly",
+    "type": "Video",
+    "level": "Intermediate",
+    "url": "https://intranet.cox.example.com/ai/firefly-images",
+    "summary": "A 12-minute screen recording covering prompts, styles, and rights-safe exports.",
+    "tags": ["images", "creative", "firefly"]
+  },
+  {
+    "title": "Summarizing Research with Copilot",
+    "type": "Walkthrough",
+    "level": "Beginner",
+    "url": "https://intranet.cox.example.com/ai/copilot-summaries",
+    "summary": "Use Copilot in Word and Outlook to summarize reports and long email threads.",
+    "tags": ["productivity", "copilot", "research"]
+  },
+  {
+    "title": "Reviewing AI Output for Brand Voice",
+    "type": "Article",
+    "level": "Advanced",
+    "url": "https://intranet.cox.example.com/ai/brand-voice-review",
+    "summary": "A checklist for editing AI drafts so they meet Cox tone, accuracy, and compliance standards.",
+    "tags": ["brand voice", "editing", "quality"]
+  },
+  {
+    "title": "Fact-Checking and Avoiding Hallucinations",
+    "type": "Article",
+    "level": "Advanced",
+    "url": "https://intranet.cox.example.com/ai/fact-checking",
+    "summary": "Why AI invents details and a practical workflow to verify claims before anything ships.",
+    "tags": ["quality", "data safety", "research"]
+  }
+]

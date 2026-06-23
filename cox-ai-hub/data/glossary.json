@@ -1,0 +1,86 @@
+[
+  {
+    "term": "AI (Artificial Intelligence)",
+    "definition": "Software that performs tasks we usually associate with human thinking, such as writing, summarizing, or recognizing images.",
+    "category": "Core concept",
+    "seeAlso": ["Machine Learning", "Generative AI"]
+  },
+  {
+    "term": "Generative AI",
+    "definition": "AI that creates new content — text, images, audio, or video — rather than just classifying or scoring existing data.",
+    "category": "Core concept",
+    "seeAlso": ["LLM", "Prompt"]
+  },
+  {
+    "term": "LLM (Large Language Model)",
+    "definition": "The technology behind tools like ChatGPT and Claude. It predicts text one piece at a time based on patterns learned from huge amounts of writing.",
+    "category": "Core concept",
+    "seeAlso": ["Token", "Prompt", "Generative AI"]
+  },
+  {
+    "term": "Prompt",
+    "definition": "The instruction or question you give an AI tool. Clearer, more specific prompts produce better results.",
+    "category": "Working with AI",
+    "seeAlso": ["Prompt Engineering", "Context Window"]
+  },
+  {
+    "term": "Prompt Engineering",
+    "definition": "The practice of wording and structuring prompts to get more accurate, useful, on-brand output.",
+    "category": "Working with AI",
+    "seeAlso": ["Prompt"]
+  },
+  {
+    "term": "Token",
+    "definition": "A chunk of text (roughly 4 characters or three-quarters of a word) that language models read and write. Usage and limits are often measured in tokens.",
+    "category": "Core concept",
+    "seeAlso": ["LLM", "Context Window"]
+  },
+  {
+    "term": "Context Window",
+    "definition": "How much text an AI tool can consider at once. A bigger context window means it can handle longer documents or conversations.",
+    "category": "Core concept",
+    "seeAlso": ["Token", "LLM"]
+  },
+  {
+    "term": "Hallucination",
+    "definition": "When an AI confidently states something that is wrong or made up. Always verify facts, names, and figures before using AI output.",
+    "category": "Risks & quality",
+    "seeAlso": ["Grounding", "Fact-Checking"]
+  },
+  {
+    "term": "Grounding",
+    "definition": "Connecting an AI tool to trusted sources (documents, search results) so its answers are based on real, verifiable information.",
+    "category": "Risks & quality",
+    "seeAlso": ["Hallucination", "RAG"]
+  },
+  {
+    "term": "RAG (Retrieval-Augmented Generation)",
+    "definition": "A method where an AI looks up relevant documents first, then writes an answer based on them — reducing made-up content.",
+    "category": "Working with AI",
+    "seeAlso": ["Grounding", "LLM"]
+  },
+  {
+    "term": "Machine Learning",
+    "definition": "A branch of AI where systems learn patterns from data instead of being explicitly programmed with rules.",
+    "category": "Core concept",
+    "seeAlso": ["AI (Artificial Intelligence)"]
+  },
+  {
+    "term": "Fine-Tuning",
+    "definition": "Further training an existing AI model on extra examples so it performs better for a specific task or style.",
+    "category": "Working with AI",
+    "seeAlso": ["LLM"]
+  },
+  {
+    "term": "Multimodal",
+    "definition": "An AI tool that can work with more than one type of input or output — for example reading an image and responding in text.",
+    "category": "Core concept",
+    "seeAlso": ["Generative AI"]
+  },
+  {
+    "term": "Fact-Checking",
+    "definition": "Verifying AI-generated claims against reliable sources before publishing or sharing them.",
+    "category": "Risks & quality",
+    "seeAlso": ["Hallucination"]
+  }
+]
